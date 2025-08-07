@@ -1,31 +1,42 @@
 import random
-is_running = True
 words = ["apple", "bread", "chair", "dance", "eagle",
-    "flame", "grape", "heart", "ivory", "jelly",
-    "knife", "lemon", "magic", "night", "ocean",
-    "plant", "quiet", "river", "stone", "trust"]
+        "flame", "grape", "heart", "ivory", "jelly",
+        "knife", "lemon", "magic", "night", "ocean",
+        "plant", "quiet", "river", "stone", "trust""about", "actor", "adobe", "agile", "agent", "angel", "anger", "apple", "arena", "armor", 
+        "award", "aware", "badge", "basic", "beach", "begin", "belly", "blade", "blend", "bless", 
+        "block", "board", "boast", "brave", "brick", "bride", "bring", "broad", "brush", "build", 
+        "burst", "cable", "campy", "chain", "chalk", "charm", "chest", "chief", "choir", "claim", 
+        "clear", "climb", "cloud", "coach", "color", "coral", "craft", "crash", "cream", "crime", 
+        "crush", "curve", "dance", "death", "delay", "devil", "diary", "doubt", "dream", "drive", 
+        "drunk", "eager", "earth", "elbow", "elder", "empty", "enemy", "enjoy", "entry", "equal", 
+        "faith", "fancy", "fault", "feast", "fiber", "field", "flame", "floor", "flour", "force", 
+        "frame", "fraud", "fresh", "front", "fruit", "giant", "glory", "grace", "graph" 
+        "green", "grief", "grind", "group","great"
+]
 answer = random.choice(words)
+global green 
+green = 0
 def word_exists():
-    global guess
-    guesses = 0 
     with open("words.txt", "r") as file:
         content = file.read()
         if guess in content:
-            guesses += 1
-            display_results(guesses)
+            display_results()
         else:
             print("Enter a valid word")
 def main():
-    while is_running:
-        global guess
-        guess = input("Guess the five-letter word: ")
-        while len(guess) == 5:
-            guess = input("Guess the five-letter word: ")
-            word_exists()
-        print("Enter valid length")
-def display_results(num_guesses):
     global guess
-    green = 0   
+    global guesses
+    guesses = 0
+    while guesses < 5:
+        guess = input("Guess the five-letter word: ")
+        if  len(guess) == 5:
+            word_exists()
+            guesse += 1
+        elif not len(guess) == 5:
+            print("Enter valid length")
+def display_results():
+    global green 
+    green = 0
     guess_characters = list(guess)
     answer_characters = list(answer)
     if guess_characters[0] == answer_characters[0]:
@@ -53,15 +64,19 @@ def display_results(num_guesses):
         green += 1
     elif guess_characters[4] in answer_characters:
         print("5 is yellow")
+    win_lose()
+def win_lose():
     if green == 5:
         display_answer()
         print("You win")
-        is_running = False
-    if num_guesses == 5:
+        print("Thank you for using wordle") 
+        quit()
+    if guesses == 5:
         display_answer()
-        print("You lose") 
-        is_running = False     
+        print("You lose")
+        print("Thank you for using wordle")
+        quit()
 def display_answer():
-    print(answer)
+    print(f"The answer was {answer}")
 if __name__ == "__main__":
     main()
