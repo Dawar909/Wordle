@@ -1,4 +1,5 @@
 import random
+# I am Steve and I am Obese
 words = ["apple", "bread", "chair", "dance", "eagle",
         "flame", "grape", "heart", "ivory", "jelly",
         "knife", "lemon", "magic", "night", "ocean",
